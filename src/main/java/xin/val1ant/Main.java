@@ -13,10 +13,7 @@ import java.util.Set;
  */
 public class Main {
 
-    // 是否找到匹配字符集
-    private static boolean isFind = false;
-    // 如果完全匹配某个字符集检测算法, 则该属性保存该字符集的名称. 否则(如二进制文件)其值就为默认值 null
-    private static String encoding = null;
+
 
     public static void main(String[] args) {
         String path = args[0];
@@ -26,8 +23,8 @@ public class Main {
             types.add(s);
         }
         File directory = new File(".");
-        System.out.println(directory.getAbsolutePath());
-//        handle(directory.getAbsolutePath(),types);
+//        System.out.println(directory.getAbsolutePath());
+        handle(directory.getAbsolutePath(),types);
 
     }
 
@@ -46,6 +43,8 @@ public class Main {
                         String charset = getCharset(file.getAbsoluteFile());
 //                        String charset = FileUtils
                         if (charset.equals("GBK") && types.contains(fileName.substring(fileName.lastIndexOf(".")+1))){
+                            //输出过程
+                            System.out.println(fileName+": charset encode converting........");
                             //如果编码为GBK 且在指定文件类型范围内
                             FileUtils.writeLines(new File(file.getAbsolutePath()),"UTF-8",FileUtils.readLines(file,"GBK"));
                         }
